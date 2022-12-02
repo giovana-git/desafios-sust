@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-2
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  tls:
+  - hosts:
+    - "c.giovanaalmeida.ga"
+    - "d.giovanaalmeida.ga"
+    secretName: "certificate-cm"
+  ingressClassName: nginx
+  rules:
+  - host: c.giovanaalmeida.ga
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: s-app-c
+            port: 
+              number: 80
+  - host: d.giovanaalmeida.ga
+    http:
+      paths: 
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: s-app-d
+            port: 
+              number: 80

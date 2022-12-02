@@ -1,0 +1,4 @@
+module "vpc" {
+
+  source = "./vpc"
+}

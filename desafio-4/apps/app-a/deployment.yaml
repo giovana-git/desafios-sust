@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: front-nginx
+  name: front-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front-nginx
+  template:
+    metadata:
+      labels:
+        app: front-nginx
+    spec:
+      containers:
+        - image: giovanacosta/app1:latest
+          name: front-nginx
+          ports:
+            - containerPort: 80
+              name: front-nginx
